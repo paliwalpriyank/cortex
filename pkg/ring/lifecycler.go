@@ -377,7 +377,7 @@ func (i *Lifecycler) initRing(ctx context.Context) error {
 		if in == nil {
 			ringDesc = NewDesc()
 		} else {
-			ringDesc = in.(*Desc)
+			ringDesc = migrateRing(in.(*Desc))
 		}
 
 		ingesterDesc, ok := ringDesc.Ingesters[i.ID]
@@ -405,7 +405,7 @@ func (i *Lifecycler) autoJoin(ctx context.Context) error {
 		if in == nil {
 			ringDesc = NewDesc()
 		} else {
-			ringDesc = in.(*Desc)
+			ringDesc = migrateRing(in.(*Desc))
 		}
 
 		// At this point, we should not have any tokens, and we should be in PENDING state.
